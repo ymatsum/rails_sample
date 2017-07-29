@@ -8,10 +8,13 @@ deploy:
   app: fathomless-atoll-40377
   on:
     repo: ymatsum/rails_sample
-  run: "rake db:migrate"
+  run: rake db:migrate
 addons:
-  postgresql: "9.3"
+  postgresql: '9.3'
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres 
-  - cp config/database.yml.travis config/database.yml
-  - bin/rake db:migrate RAILS_ENV=test
+- psql -c 'create database travis_ci_test;' -U postgres
+- cp config/database.yml.travis config/database.yml
+- bin/rake db:migrate RAILS_ENV=test
+notifications:
+  slack:
+    secure: NAoLdBkgHMP+xfUEhlzHjKaS/LhTOU/2AGQWQ15bArDo2h3NQfqvS3LKsuGhcXfuiR1Jg2zqKOdcPOX2eO7OMA1roCZs8B2Dd7d9eHCsTFBHgf8YiKvsz9y1wql6Xx446EU4ECbzVaui/aN2ZQFFbPVG46dlb99kaduoriq6lBsiXGegJDZc4yd+JkwuQ1z8RY7IRjvOHjcebM22sQdnpGD6zgWSyf4cBGtbWd9xiP1KUcWhTovJ6T43u4SmBf1/WECkvI4ZYdGYvOzQ8uKT3wTqLBGSLU7R51o4C6F3hmPrXQxsgnshUm89nriz1X4Ny2bzi4C2N56/olGrh1wJe5Il7TlXL4JyaxhPkMY26PUDnLvEWqt6t2fOynzyqWDeoKl460r7SNFQXQkkH4jxDuGmj+zeuFu8/PHspz6TBFbzQ5KPqP7CGF/etP6ySnofJPWhUJ1QlUCz/RmL10tITvin7kVBe/XhQh71aHbIxy+v8Qw+D69ETKVbduAURt1vSndIaeL8Zq3VqSAoBuE2iV6HbEsgmiF9YHPKb0VRXg1OngGhmV7Ltz3e8CktOgn7eEMW/4UJHFt8g2ugvVC8YXxPMlmJW1SJ12v23XjWzUK4t24esxLLNP1hmiDyGQIAR5G2upLM1vFF3ChbMFiogxi9tF0dVA4osj8ySuWum2I=
