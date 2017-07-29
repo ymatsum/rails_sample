@@ -1,0 +1,17 @@
+language: ruby
+rvm:
+- 2.2.5
+deploy:
+  provider: heroku
+  api_key:
+    secure: LvkfzPliKiymt57sNvQwvPd1ZaF/9LdnWIrl0BHhX98vAb2l0xMrj199TE6APpJLlzAmEjmNEv2kRYyVqPJNHxG2niZ97BnysyvGzWoEd+b+Mqgt8UQQMn5HY/IuoucPEA/dAlDYjp2X08bVYGWQnj7oU+fHxG/23GTCXcUZTsgD2EB5B6+LN4zpOtrhvyDT5ZjmHBFS1Mb+dFuuEmxKib7ght2lkPif2kMs2Oqd6t4mUgwSG4E2MvSpcyTptphs9qYb5a0JWBSBozrnrCRXRyBw4fGdtH8nT/7UX/GnlpQuqR7rIt4kAOlqrZg5Rt6XujnVSA0xkowZDnptDYnZqx9Asg3pF2s1rUrTytS1dflCa5gi974+G8NFu0y5duZbjkcZk1IeL/s06YV+Eru7IEV/9k6tR/M/rg/z8WyfWsyZrwiCLW3M889Um8z8sz/LxaT4XUL5WmGK4fflRUh3IaStS326xNLVVMNFhphbQdI9f5CjceCmX2c+AM+iAQeDiL0l+umu/chPAdyQLpcUwG1N/UhsDzkUiEZyS6neM6bSzK8I+Cero91nz5bqOQ4Y4UEvMKi5AmC9c9gjmICOfPU9pJbSrhbqLA1sLmd7eXsRCD/IpMAnr60drWYmavXhiy5KgSx12a00Qmz7KnOXMaF9K4ZtaB9MdmteyW2uvDA=
+  app: fathomless-atoll-40377
+  on:
+    repo: ymatsum/rails_sample
+  run: "rake db:migrate"
+addons:
+  postgresql: "9.3"
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres 
+  - cp config/database.yml.travis config/database.yml
+  - bin/rake db:migrate RAILS_ENV=test
